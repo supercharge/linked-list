@@ -51,6 +51,24 @@ export class LinkedList<T> {
   }
 
   /**
+   * Determine whether this linked list is empty.
+   *
+   * @returns {Boolean}
+   */
+  isEmpty (): boolean {
+    return this.isMissingHead()
+  }
+
+  /**
+   * Determine whether this linked list is not empty.
+   *
+   * @returns {Boolean}
+   */
+  isNotEmpty (): boolean {
+    return !this.isEmpty()
+  }
+
+  /**
    * Insert the given `values` at the end of the list.
    *
    * @param {T[]} values
