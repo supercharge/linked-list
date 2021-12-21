@@ -1,0 +1,48 @@
+{
+  "name": "@supercharge/linked-list",
+  "description": "A Linked List implementation for JavaScript",
+  "version": "0.0.0",
+  "author": "Marcus Pöhls <marcus@superchargejs.com>",
+  "bugs": {
+    "url": "https://github.com/supercharge/linked-list/issues"
+  },
+  "devDependencies": {
+    "@supercharge/tsconfig": "~3.1.0",
+    "@supercharge/eslint-config-typescript": "~1.0.0",
+    "c8": "~7.9.0",
+    "eslint": "~7.32.0",
+    "expect": "~27.2.2",
+    "typescript": "~4.4.2",
+    "uvu": "~0.5.1"
+  },
+  "main": "dist",
+  "types": "dist",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/supercharge/linked-list",
+  "keywords": [
+    "supercharge",
+    "superchargejs",
+    "linked-list",
+    "linked list",
+    "nodejs"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supercharge/linked-list.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run build && npm run lint && npm run test:run",
+    "test:run": "c8 --include=dist uvu",
+    "posttest": "c8 report --reporter=html"
+  }
+}
