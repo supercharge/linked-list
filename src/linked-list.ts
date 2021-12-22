@@ -95,10 +95,6 @@ export class LinkedList<T> {
    * @returns {T[]}
    */
   toArray (): T[] {
-    if (this.isMissingHead()) {
-      return []
-    }
-
     const values: T[] = []
     let node = this.head()
 
