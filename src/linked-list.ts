@@ -148,4 +148,13 @@ export class LinkedList<T> {
 
     return nodes
   }
+
+  /**
+   * Returns a size of the linked list.
+   *
+   * @returns {Number}
+   */
+  size (): Number {
+    return this.nodes().length
+  }
 }

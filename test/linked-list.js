@@ -97,4 +97,16 @@ test('find', () => {
   ).toBeUndefined()
 })
 
+test('size', () => {
+  expect(LinkedList.from().size()).toBe(0)
+  expect(LinkedList.from([]).size()).toBe(0)
+
+  expect(LinkedList.from(1).size()).toBe(1)
+  expect(LinkedList.from([1]).size()).toBe(1)
+  expect(LinkedList.from(null).size()).toBe(1)
+
+  expect(LinkedList.from(1, 2, 3).size()).toBe(3)
+  expect(LinkedList.from([1, 2, 3]).size()).toBe(3)
+})
+
 test.run()
