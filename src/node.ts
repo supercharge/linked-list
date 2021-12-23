@@ -46,6 +46,15 @@ export class Node<T> {
   }
 
   /**
+   * Determine whether this node is not pointing to a next value.
+   *
+   * @returns {Boolean}
+   */
+  isMissingNext (): boolean {
+    return !this.hasNext()
+  }
+
+  /**
    * Returns the next value.
    */
   next (): Node<T> | undefined {
@@ -56,11 +65,6 @@ export class Node<T> {
    * Returns the next value.
    */
   setNext (node: Node<T>): this {
-    if (this.hasNext()) {
-      this.next()!.setNext(node)
-      return this
-    }
-
     this.meta.next = node
 
     return this
