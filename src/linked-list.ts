@@ -15,7 +15,7 @@ export class LinkedList<T> {
    *
    * @param items
    */
-  constructor (...values: T[]) {
+  constructor (...values: T[] | T[][]) {
     this.meta = {}
 
     this.push(...values)
@@ -28,7 +28,9 @@ export class LinkedList<T> {
    *
    * @returns {LinkedList<T>}
    */
-  static from<T> (...values: T[]): LinkedList<T> {
+  static from<T> (values: T[]): LinkedList<T>
+  static from<T> (...values: T[]): LinkedList<T>
+  static from<T> (...values: T[] | T[][]): LinkedList<T> {
     return new this(...values)
   }
 
@@ -39,6 +41,17 @@ export class LinkedList<T> {
    */
   head (): Node<T> | undefined {
     return this.meta.head
+  }
+
+  /**
+   * Returns the tail node.
+   *
+   * @returns {Node<T> | undefined}
+   */
+  tail (): Node<T> | undefined {
+    return this.find(node => {
+      return node.isMissingNext()
+    })
   }
 
   /**
@@ -69,21 +82,40 @@ export class LinkedList<T> {
   }
 
   /**
+   * Returns the first item in the set matching the given `predicate`
+   * function, or `undefined` if no such item was found.
+   *
+   * @param {Function} predicate
+   *
+   * @returns {*}
+   */
+  find (predicate: (node: Node<T>, index: number, linkedList: LinkedList<T>) => unknown): Node<T> | undefined
+  find<S extends T> (predicate: (node: Node<T>, index: number, linkedList: LinkedList<T>) => node is Node<S>): S | undefined
+  find (predicate: (node: Node<T>, index: number, linkedList: LinkedList<T>) => unknown): Node<T> | undefined {
+    return this.nodes().find((node, index) => {
+      return predicate(node, index, this)
+    })
+  }
+
+  /**
    * Insert the given `values` at the end of the list.
    *
    * @param {T[]} values
    *
    * @returns {this}
    */
-  push (...values: T[]): this {
+  push (...values: T[] | T[][]): this {
     ([] as T[])
       .concat(...values)
       .forEach(value => {
         const node = Node.create(value)
 
-        this.isMissingHead()
-          ? this.meta.head = node
-          : this.head()!.setNext(node)
+        if (this.isMissingHead()) {
+          this.meta.head = node
+          return
+        }
+
+        this.tail()?.setNext(node)
       })
 
     return this
@@ -95,14 +127,25 @@ export class LinkedList<T> {
    * @returns {T[]}
    */
   toArray (): T[] {
-    const values: T[] = []
+    return this.nodes().map(node => {
+      return node.value()
+    })
+  }
+
+  /**
+   * Returns a list of all nodes.
+   *
+   * @returns {Node<T>[]}
+   */
+  nodes (): Array<Node<T>> {
+    const nodes: Array<Node<T>> = []
     let node = this.head()
 
     while (node) {
-      values.push(node.value())
+      nodes.push(node)
       node = node.next()
     }
 
-    return values
+    return nodes
   }
 }
