@@ -42,7 +42,7 @@ npm i @supercharge/linked-list
 
 ## Resources
 
-- [Documentation](https://superchargejs.com/docs/set)
+- [Documentation](https://superchargejs.com/docs/linked-list)
 
 
 ## Quick Usage Overview
