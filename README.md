@@ -55,7 +55,9 @@ const linkedList = new LinkedList()
 
 linkedList.isEmpty() // true
 
-users.isNotEmpty() // true
+linkedList.push(1)
+
+linkedList.isNotEmpty() // true
 ```
 
 
