@@ -50,7 +50,7 @@ export class Node<T> {
    *
    * @returns {Boolean}
    */
-  isMissingNext (): boolean {
+  isTail (): boolean {
     return !this.hasNext()
   }
 

@@ -50,7 +50,7 @@ export class LinkedList<T> {
    */
   tail (): Node<T> | undefined {
     return this.find(node => {
-      return node.isMissingNext()
+      return node.isTail()
     })
   }
 
